@@ -4,7 +4,7 @@
 Plugin Name: TriPay Payment Gateway
 Plugin URI: https://tripay.co.id
 Description: Terima pembayaran online dengan banyak pilihan channel seperti Virtual Account, Convenience Store, E-Wallet, E-Banking, dll
-Version: 3.3.2
+Version: 3.3.3
 Author: PT Trijaya Digital Grup
 Author URI: https://tridi.net
 WC requires at least: 3.1.0
@@ -180,17 +180,9 @@ function woocommerce_tripay_init()
 
                 $order = new WC_Order($order_id);
                 $exchangeValue = get_option(TripayPayment::$option_prefix.'_exchange_rate', null);
-
-                if ($order->has_status('pending') && $this->initial_status == 'on-hold') {
-                    $order->update_status('on-hold', __('Menunggu Pembayaran dengan TriPay', 'woocommerce'));
-                } elseif ($order->has_status('on-hold') && $this->initial_status == 'pending') {
-                    $order->update_status('pending', __('Menunggu Pembayaran dengan TriPay', 'woocommerce'));
-                }
-
                 $totalAmount = TripayPayment::convertUsdToIdr($order->order_total, $exchangeValue);
-
                 $url = TripayPayment::buildApiUrl('/transaction/create');
-                $current_user = esc_html($order->billing_first_name.' '.$order->billing_last_name);
+                $current_user = esc_html($order->get_billing_first_name().' '.$order->get_billing_last_name());
                 $item_details = [];
 
                 foreach ($order->get_items() as $item_key => $item) {
@@ -276,8 +268,8 @@ function woocommerce_tripay_init()
                     'method' => $this->payment_method,
                     'merchant_ref' => $order_id,
                     'customer_name' => $current_user,
-                    'customer_email' => $order->billing_email,
-                    'customer_phone' => $order->billing_phone,
+                    'customer_email' => $order->get_billing_email(),
+                    'customer_phone' => $order->get_billing_phone(),
                     'expired_time' => $expired_time,
                     'return_url' => $returnUrl,
                     'order_items' => $item_details,
@@ -347,7 +339,7 @@ function woocommerce_tripay_init()
                     if ($this->customer_invoice_email) {
                         WC()->mailer()->get_emails()['WC_Email_Customer_Invoice']->trigger($order_id);
                     }
-
+                    $order->update_status('on-hold', __('Menunggu Pembayaran dengan TriPay', 'woocommerce'));
                     return ['result' => 'success', 'redirect' => $redirectTo];
                 } else {
                     if ($response_code == 400) {
@@ -514,7 +506,7 @@ function woocommerce_tripay_init()
     }
 }
 
-/*
+/**
  * Registers WC_Xendit_Blocks as a payment method for WooCommerce blocks.
  *
  * This method checks if the `AbstractPaymentMethodType` class from WooCommerce Blocks exists.
