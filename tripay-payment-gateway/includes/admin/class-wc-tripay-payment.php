@@ -8,7 +8,7 @@ class TripayPayment
 {
     public static $tab_name = 'tripay_settings';
     public static $option_prefix = 'tripay';
-    public static $version = '3.3.3';
+    public static $version = '3.3.4';
     public static $baseurl = 'https://tripay.co.id';
 
     public static function init()

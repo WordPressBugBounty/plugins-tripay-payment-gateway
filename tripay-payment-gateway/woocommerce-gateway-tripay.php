@@ -4,7 +4,7 @@
 Plugin Name: TriPay Payment Gateway
 Plugin URI: https://tripay.co.id
 Description: Terima pembayaran online dengan banyak pilihan channel seperti Virtual Account, Convenience Store, E-Wallet, E-Banking, dll
-Version: 3.3.3
+Version: 3.3.4
 Author: PT Trijaya Digital Grup
 Author URI: https://tridi.net
 WC requires at least: 3.1.0
@@ -339,7 +339,8 @@ function woocommerce_tripay_init()
                     if ($this->customer_invoice_email) {
                         WC()->mailer()->get_emails()['WC_Email_Customer_Invoice']->trigger($order_id);
                     }
-                    $order->update_status('on-hold', __('Menunggu Pembayaran dengan TriPay', 'woocommerce'));
+                    $order->update_status($this->initial_status, __('Menunggu Pembayaran dengan TriPay', 'woocommerce'));
+
                     return ['result' => 'success', 'redirect' => $redirectTo];
                 } else {
                     if ($response_code == 400) {

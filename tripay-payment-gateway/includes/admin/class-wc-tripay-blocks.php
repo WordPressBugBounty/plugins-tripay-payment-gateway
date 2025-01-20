@@ -4,7 +4,7 @@ use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodTyp
 final class WC_Tripay_Blocks extends AbstractPaymentMethodType
 {
     public static $option_prefix = 'tripay';
-    public static $version = '3.3.3';
+    public static $version = '3.3.4';
     public static $baseurl = 'https://tripay.co.id';
     public const SCRIPT_HANDLER = 'wc-tripay-payments-blocks';
 
