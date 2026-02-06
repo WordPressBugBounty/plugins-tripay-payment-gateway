@@ -3,7 +3,7 @@ Contributors: trijayadigital, zerosdev, rofiqdev, ridhoibey
 Tags: ecommerce, e-commerce, store, sales, sell, shop, cart, checkout, downloadable, downloads, payment, bca, mandiri, bni, bri, otomatis, virtual account, credit card, payment gateway
 Requires at least: 4.7
 Tested up to: 6.7
-Stable tag: 3.3.4
+Stable tag: 3.3.7
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -189,3 +189,12 @@ Fix: Prevent XSS
 
 = 3.3.4 =
 [FIX] Initial status order
+
+= 3.3.5 =
+[ADD] Add channel QRIS Custom by ShopeePay
+
+= 3.3.6 =
+[ADD] Update Permata VA new logo
+
+= 3.3.7 =
+[FIX] Update Permata, Other Bank, and Sampoerna VA logo

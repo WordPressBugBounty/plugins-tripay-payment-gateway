@@ -4,22 +4,22 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
-class WC_Gateway_Tripay_SHOPEEPAY extends Tripay_Payment_Gateway
+class WC_Gateway_Tripay_QRIS_SHOPEEPAY extends Tripay_Payment_Gateway
 {
-    public $sub_id = 'tripay_shopeepay';
+    public $sub_id = 'tripay_qris_shopeepay';
 
     public function __construct()
     {
         parent::__construct();
-        $this->method_title = 'TriPay - ShopeePay';
-        $this->method_description = 'Pembayaran melalui ShopeePay';
-        $this->payment_method = 'SHOPEEPAY';
+        $this->method_title = 'TriPay - QRIS Custom by ShopeePay';
+        $this->method_description = 'Pembayaran melalui Scan QRIS Custom by ShopeePay';
+        $this->payment_method = 'QRIS_SHOPEEPAY';
 
         $this->init_form_fields();
         $this->init_settings();
 
         if ($this->settings['enable_icon'] == 'yes') {
-            $this->icon = !empty($this->settings['custom_icon']) ? esc_url($this->settings['custom_icon']) : esc_url(plugins_url('/assets/shopeepay.png', dirname(__FILE__)));
+            $this->icon = !empty($this->settings['custom_icon']) ? esc_url($this->settings['custom_icon']) : esc_url(plugins_url('/assets/qris.png', dirname(__FILE__)));
         }
     }
 
@@ -28,7 +28,7 @@ class WC_Gateway_Tripay_SHOPEEPAY extends Tripay_Payment_Gateway
         $this->form_fields = [
            'enabled' => [
                'title' => __('Enable/Disable', 'wc-tripay'),
-               'label' => __('Aktifkan ShopeePay', 'wc-tripay'),
+               'label' => __('Aktifkan QRIS Custom by ShopeePay', 'wc-tripay'),
                'type' => 'checkbox',
                'description' => '',
                'default' => 'no',
@@ -37,13 +37,13 @@ class WC_Gateway_Tripay_SHOPEEPAY extends Tripay_Payment_Gateway
                'title' => __('Judul', 'wc-tripay'),
                'type' => 'text',
                'description' => __('Nama Metode Pembayaran', 'wc-tripay'),
-               'default' => __('ShopeePay', 'wc-tripay'),
+               'default' => __('QRIS Custom by ShopeePay', 'wc-tripay'),
            ],
            'enable_icon' => [
                'title' => __('Ikon Pembayaran', 'wc-tripay'),
                'label' => __('Aktifkan Ikon', 'wc-tripay'),
                'type' => 'checkbox',
-               'description' => '<img src="'.esc_url(plugins_url('/assets/shopeepay.png', dirname(__FILE__))).'" style="height:100%;max-height:40px !important" />',
+               'description' => '<img src="'.esc_url(plugins_url('/assets/qris.png', dirname(__FILE__))).'" style="height:100%;max-height:40px !important" />',
                'default' => 'no',
            ],
            'custom_icon' => [
@@ -57,10 +57,10 @@ class WC_Gateway_Tripay_SHOPEEPAY extends Tripay_Payment_Gateway
                'title' => __('Deskripsi', 'wc-tripay'),
                'type' => 'textarea',
                'description' => __('', 'wc-tripay'),
-               'default' => 'Pembayaran melalui ShopeePay',
+               'default' => 'Pembayaran melalui Scan QR',
            ],
            'expired' => [
-               'title' => __('Masa Berlaku', 'wc-tripay'),
+               'title' => __('Masa Berlaku Kode Bayar', 'wc-tripay'),
                'type' => 'select',
                'description' => __('', 'wc-tripay'),
                'default' => '1',
@@ -87,6 +87,7 @@ class WC_Gateway_Tripay_SHOPEEPAY extends Tripay_Payment_Gateway
                'description' => __('DIRECT = Pelanggan diarahkan ke halaman invoice default WooCommerce.<br/>REDIRECT = Pelanggan diarahkan ke halaman invoice TriPay', 'wc-tripay'),
                'default' => 'REDIRECT',
                'options' => [
+                   'DIRECT' => 'DIRECT',
                    'REDIRECT' => 'REDIRECT',
                ],
            ],

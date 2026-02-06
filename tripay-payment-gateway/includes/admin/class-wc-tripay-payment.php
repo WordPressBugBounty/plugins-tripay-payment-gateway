@@ -8,7 +8,7 @@ class TripayPayment
 {
     public static $tab_name = 'tripay_settings';
     public static $option_prefix = 'tripay';
-    public static $version = '3.3.4';
+    public static $version = '3.3.7';
     public static $baseurl = 'https://tripay.co.id';
 
     public static function init()
@@ -148,16 +148,22 @@ class TripayPayment
                 'class' => 'WC_Gateway_Tripay_QRIS',
                 'type' => 'DIRECT',
             ],
+            'qris2' => [
+                'name' => 'QRIS',
+                'code' => 'QRIS2',
+                'class' => 'WC_Gateway_Tripay_QRIS2',
+                'type' => 'DIRECT',
+            ],
             'qrisc' => [
                 'name' => 'QRIS Customizable',
                 'code' => 'QRISC',
                 'class' => 'WC_Gateway_Tripay_QRISC',
                 'type' => 'DIRECT',
             ],
-            'qris2' => [
-                'name' => 'QRIS',
-                'code' => 'QRIS2',
-                'class' => 'WC_Gateway_Tripay_QRIS2',
+            'qris_shopeepay' => [
+                'name' => 'QRIS Custom by ShopeePay',
+                'code' => 'QRIS_SHOPEEPAY',
+                'class' => 'WC_Gateway_Tripay_QRIS_SHOPEEPAY',
                 'type' => 'DIRECT',
             ],
             'ovo' => [

@@ -4,7 +4,7 @@
 Plugin Name: TriPay Payment Gateway
 Plugin URI: https://tripay.co.id
 Description: Terima pembayaran online dengan banyak pilihan channel seperti Virtual Account, Convenience Store, E-Wallet, E-Banking, dll
-Version: 3.3.4
+Version: 3.3.7
 Author: PT Trijaya Digital Grup
 Author URI: https://tridi.net
 WC requires at least: 3.1.0

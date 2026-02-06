@@ -19,7 +19,7 @@ class WC_Gateway_Tripay_OTHER_VA extends Tripay_Payment_Gateway
         $this->init_settings();
 
         if ($this->settings['enable_icon'] == 'yes') {
-            $this->icon = !empty($this->settings['custom_icon']) ? esc_url($this->settings['custom_icon']) : esc_url(plugins_url('/assets/other-va.webp', dirname(__FILE__)));
+            $this->icon = !empty($this->settings['custom_icon']) ? esc_url($this->settings['custom_icon']) : esc_url(plugins_url('/assets/other-va.png', dirname(__FILE__)));
         }
     }
 
@@ -43,7 +43,7 @@ class WC_Gateway_Tripay_OTHER_VA extends Tripay_Payment_Gateway
                 'title' => __('Ikon Pembayaran', 'wc-tripay'),
                 'label' => __('Aktifkan Ikon', 'wc-tripay'),
                 'type' => 'checkbox',
-                'description' => '<img src="' . esc_url(plugins_url('/assets/other-va.webp', dirname(__FILE__))) . '" style="height:100%;max-height:40px !important" />',
+                'description' => '<img src="' . esc_url(plugins_url('/assets/other-va.png', dirname(__FILE__))) . '" style="height:100%;max-height:40px !important" />',
                 'default' => 'no',
             ],
             'custom_icon' => [
